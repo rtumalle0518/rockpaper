@@ -8,29 +8,23 @@ function computerPlay(){
         return 'scissor';
     }
 }
+
 function playToInt(play){
     if (play === 'rock') {
         return 0;
     } else if (play === 'paper') {
         return 1;
-    } else {
+    } else if (play === 'scissor'){
         return 2;
     }
 }
-function intToPlay(play){
-    if (play === 0) {
-        return 'rock';
-    } else if (play === 1) {
-        return 'paper';
-    } else {
-        return 'scissor';
-    }
-}
+
 function playRound(playerSelection, computerSelection){
     const x = playerSelection.toLowerCase();
 
     const player = playToInt(x);
     const computer = playToInt(computerSelection);
+    
 
     const win = [
         [2, 0, 0],
@@ -39,14 +33,36 @@ function playRound(playerSelection, computerSelection){
     ];
     
     if (win[player][computer] === 2) {
-        return 'It\'s a draw!';
+        console.log('It\'s a draw!');
+        return 2;
     } else if (win[player][computer] === 1) {
-        return `You Lose! ${computerSelection} beats ${x}`;
+        console.log(`You Lose! ${computerSelection} beats ${x}`);
+        return 1;
     } else if (win[player][computer] === 0) {
-        return `You win! ${x} beats ${computerSelection}`;
+        console.log(`You win! ${x} beats ${computerSelection}`);
+        return 0;
     }
 }
 
+function game(){
+    let score = 0;
+    for(let i = 0; i < 5; i++){
+        playChoice = window.prompt('What\'s your choice?');
+
+        if (playRound(playChoice, computerPlay()) === 0) {
+           score++;
+        }
+
+    }
+    if (score < 3){
+        console.log('You Lost :(');
+    } else {
+        console.log('YOU WIN THE GAME!');
+    }
+    
+}
+
+game();
 
 
 
